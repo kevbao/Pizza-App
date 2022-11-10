@@ -16,6 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 //Right Side needs to be implemented and
 //Buttonhandler needs to be created for selected orders and chef
@@ -34,8 +37,15 @@ public class ChefView extends VBox {
 		
 		allOrders = new ToggleGroup();
 		
-		Rectangle header = new Rectangle(0, 0, 900, 100);
-		header.setFill(Color.GOLD);
+		Rectangle header1 = new Rectangle(0, 0, 900, 45);
+		header1.setFill(Color.GOLD);
+		Text title = new Text("SunDevil Pizza");
+		title.setFont(Font.font("Impact", 38));
+		title.setTextAlignment(TextAlignment.CENTER);
+		title.setFill(Color.MAROON);
+		title.setStroke(Color.GOLD);
+		Rectangle header2 = new Rectangle(0, 0, 900, 45);
+		header2.setFill(Color.GOLD);
 
 		HBox control = new HBox();
 		
@@ -95,7 +105,7 @@ public class ChefView extends VBox {
 		control.getChildren().addAll(borderPane);
 		control.getChildren().addAll(borderPane2);
 		
-		this.getChildren().addAll(header, control);
+		this.getChildren().addAll(header1, title, header2, control);
 		this.setSpacing(25);
 	}
 	public void updateOrders(Student order) {
