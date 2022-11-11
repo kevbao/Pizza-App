@@ -154,4 +154,5 @@ public class CustomerView extends VBox{
 			opv.updateOrders(order);
 		}
 	}
+
 }
