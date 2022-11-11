@@ -32,13 +32,16 @@ public class OrderProcessorView extends VBox {
 	private static VBox orders;
 	private Label lab1;
 	private Button accept;
+	private Button reject;
 	private ChefView chefView;
 	private ToggleGroup allOrders;
+	//private CustomerView custView;
 	
 	public OrderProcessorView(ArrayList<Student> list, ChefView chefView) {
 		
 		this.studentList = list;
 		this.chefView = chefView;
+		//this.custView = custView;
 		
 		allOrders = new ToggleGroup();
 		
@@ -62,10 +65,17 @@ public class OrderProcessorView extends VBox {
 		lab1 = new Label("Orders");
 		accept = new Button("Accept");
 		accept.setOnAction(new ButtonHandler());
+		reject = new Button("Reject");
+		reject.setOnAction(new ButtonHandler());
+		HBox leftBox = new HBox(accept);
+		HBox rightBox = new HBox(reject);
+		HBox bottom = new HBox(leftBox, rightBox);
+		bottom.setPadding(new Insets(10));
+		
 		
 		borderPane.setTop(lab1);
 		borderPane.setCenter(scrollPane);
-		borderPane.setBottom(accept);
+		borderPane.setBottom(bottom);
 		borderPane.setPrefSize(300, 420);
 		BorderPane.setMargin(scrollPane, new Insets(10, 0, 10, 0));
 		borderPane.setPadding(new Insets(0, 0, 0, 30));
@@ -93,23 +103,39 @@ public class OrderProcessorView extends VBox {
 		private Student order;
 		
 		public SelectionHandler(Student order) {
-		
 			this.order = order;
 		}
 		public void handle(ActionEvent event) {
-
+			
 			boolean selected = ((RadioButton)event.getSource()).isSelected();
 			
 			if (selected) {
 				temp = order;
 			} 
-		}
+			
+
+			} 
+	
 	}
 	private class ButtonHandler implements EventHandler<ActionEvent> {
 		//ButtonHandler manages the Accept button, when clicked, it adds 
 		//the selected order to the chef UI
 		public void handle(ActionEvent event) {
-			chefView.updateOrders(temp);
+			
+
+				//chefView.updateOrders(temp);
+	
+
+				//studentList.remove(temp);
+				if(event.getSource() == reject) {
+					orders.getChildren().remove(0);
+				}
+				
+				if(event.getSource() == accept) {
+					chefView.updateOrders(temp);
+					orders.getChildren().remove(0);
+				}
+			
 		}
 	}
 }
