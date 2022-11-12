@@ -15,6 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -127,78 +128,66 @@ public class CustomerView extends VBox{
 		this.getChildren().addAll(header1, title, header2, menu);
 		this.setSpacing(25);
 		
-		//Error Handling
-		Alert error = new Alert(AlertType.NONE);
-				
-		EventHandler<ActionEvent> errorEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-						
-				//if pickup time is empty
-				if(txt1.getText().isEmpty()) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Please enter a pickup time");
-					error.show();
-				}  
-				//if name is empty 
-				else if(txt2.getText().isEmpty()) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Please enter your name");
-					error.show();
-				} 
-				//if ASURITE ID is empty
-				else if(txt3.getText().isEmpty()) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Please enter your ASURITE ID");
-					error.show();
-				}
-				
-				if(txt3.getText().contains("a") || txt3.getText().contains("b") || txt3.getText().contains("c") || txt3.getText().contains("d") || txt3.getText().contains("e") || txt3.getText().contains("f") || txt3.getText().contains("g") || txt3.getText().contains("h") || txt3.getText().contains("i") || txt3.getText().contains("j") || txt3.getText().contains("k") || txt3.getText().contains("l") || txt3.getText().contains("m") || txt3.getText().contains("n") || txt3.getText().contains("o") || txt3.getText().contains("p") || txt3.getText().contains("q") || txt3.getText().contains("r") || txt3.getText().contains("s") || txt3.getText().contains("t") || txt3.getText().contains("u") || txt3.getText().contains("v") || txt3.getText().contains("w") || txt3.getText().contains("x") || txt3.getText().contains("y") || txt3.getText().contains("z")) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Numbers Only (0-9)");
-					error.show();
-				}
-				
-				if(txt3.getText().contains("A") || txt3.getText().contains("B") || txt3.getText().contains("C") || txt3.getText().contains("D") || txt3.getText().contains("E") || txt3.getText().contains("F") || txt3.getText().contains("G") || txt3.getText().contains("H") || txt3.getText().contains("I") || txt3.getText().contains("J") || txt3.getText().contains("K") || txt3.getText().contains("L") || txt3.getText().contains("M") || txt3.getText().contains("N") || txt3.getText().contains("O") || txt3.getText().contains("P") || txt3.getText().contains("Q") || txt3.getText().contains("R") || txt3.getText().contains("S") || txt3.getText().contains("T") || txt3.getText().contains("U") || txt3.getText().contains("V") || txt3.getText().contains("W") || txt3.getText().contains("X") || txt3.getText().contains("Y") || txt3.getText().contains("Z")) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Numbers Only (0-9)");
-					error.show();
-				}
-				
-				//if toppings are not selected
-				if(!mushrooms.isSelected() && !onions.isSelected() && !olives.isSelected() && !xcheese.isSelected()) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Please choose toppings");
-					error.show();
-				}
-						
-				//if pizza type is not chosen
-				if(pizzaTypes.getSelectionModel().getSelectedItem() == null) {
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Please choose your pizza type");
-					error.show();
-				}
-						
-						
-				
-			}
-					
-			 
-					
-		};
-		submit.setOnAction(errorEvent);
 		
 		
 	}
 	
 	private class NewOrderHandler implements EventHandler<ActionEvent>
 	{
+		
+		
 		//the newOrderHandler will take all user inputs and make a new student object
 		//this is then sent to the OP view
 		public void handle(ActionEvent event)
 		{
 			Student order = new Student();
-			//Decide Type
-			if (pizzaTypes.getValue().equals("Pepperoni"))
+			Alert error = new Alert(AlertType.NONE);
+			boolean errorMessage = false;
+			
+			//Error Handling: if pickup time is empty
+			if(txt1.getText().isEmpty()) {
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Please enter a pickup time");
+				error.show();
+				errorMessage = true;
+			}  
+			//Error Handling: if name is empty 
+			else if(txt2.getText().isEmpty()) {
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Please enter your name");
+				error.show();
+				errorMessage = true;
+			} 
+			
+			//Error Handling: if ASURITE ID is empty
+			else if(txt3.getText().isEmpty()) {
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Please enter your ASURITE ID");
+				error.show();
+				errorMessage = true;
+			}
+			if(txt3.getText().contains("a") || txt3.getText().contains("b") || txt3.getText().contains("c") || txt3.getText().contains("d") || txt3.getText().contains("e") || txt3.getText().contains("f") || txt3.getText().contains("g") || txt3.getText().contains("h") || txt3.getText().contains("i") || txt3.getText().contains("j") || txt3.getText().contains("k") || txt3.getText().contains("l") || txt3.getText().contains("m") || txt3.getText().contains("n") || txt3.getText().contains("o") || txt3.getText().contains("p") || txt3.getText().contains("q") || txt3.getText().contains("r") || txt3.getText().contains("s") || txt3.getText().contains("t") || txt3.getText().contains("u") || txt3.getText().contains("v") || txt3.getText().contains("w") || txt3.getText().contains("x") || txt3.getText().contains("y") || txt3.getText().contains("z")) {
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Numbers Only (0-9)");
+				error.show();
+				errorMessage = true;
+			}
+			if(txt3.getText().contains("A") || txt3.getText().contains("B") || txt3.getText().contains("C") || txt3.getText().contains("D") || txt3.getText().contains("E") || txt3.getText().contains("F") || txt3.getText().contains("G") || txt3.getText().contains("H") || txt3.getText().contains("I") || txt3.getText().contains("J") || txt3.getText().contains("K") || txt3.getText().contains("L") || txt3.getText().contains("M") || txt3.getText().contains("N") || txt3.getText().contains("O") || txt3.getText().contains("P") || txt3.getText().contains("Q") || txt3.getText().contains("R") || txt3.getText().contains("S") || txt3.getText().contains("T") || txt3.getText().contains("U") || txt3.getText().contains("V") || txt3.getText().contains("W") || txt3.getText().contains("X") || txt3.getText().contains("Y") || txt3.getText().contains("Z")) {
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Numbers Only (0-9)");
+				error.show();
+				errorMessage = true;
+			}
+			
+			//Decide Pizza Type
+			if (pizzaTypes.getSelectionModel().getSelectedItem() == null) {
+				//Error Handling: if pizza type is not chosen
+					error.setAlertType(AlertType.ERROR);
+					error.setContentText("Please choose your pizza type");
+					error.show();
+					errorMessage = true;
+			}
+			else if (pizzaTypes.getValue().equals("Pepperoni"))
 			{
 				order.getOrder().setType("Pepperoni");
 			} 
@@ -210,6 +199,7 @@ public class CustomerView extends VBox{
 			{
 				order.getOrder().setType("Cheese");
 			}
+			
 			
 			//Decide Toppings
 			if (mushrooms.isSelected()) 
@@ -228,14 +218,28 @@ public class CustomerView extends VBox{
 			{
 				order.getOrder().getToppings().add("Extra Cheese");
 			}
+			//Error Handling: if toppings are not selected
+			if(!mushrooms.isSelected() && !onions.isSelected() && !olives.isSelected() && !xcheese.isSelected()) {
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Please choose toppings");
+				error.show();
+				errorMessage = true;
+			}
 			
+			//Setting necessary parameters to accept order
 			order.setTime(txt1.getText());
 			order.setName(txt2.getText());
 			order.setId(Integer.parseInt(txt3.getText()));
 			
+			if (errorMessage == false) {
+			//Pushing successful order to next process
 			studentList.add(order);
 			opv.updateOrders(order);
+			//Successful order message
+			String content = "Order Confirmed!";
+			Alert success = new Alert(Alert.AlertType.INFORMATION, content, ButtonType.OK);
+			success.show();
+			}
 		}
 	}
-
 }
