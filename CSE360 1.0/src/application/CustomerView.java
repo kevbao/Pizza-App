@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -51,6 +52,9 @@ public class CustomerView extends VBox{
 	private Button submit;
 	private OrderProcessorView opv;
 	private CheckBox mushrooms, onions, olives, xcheese;
+	private HBox menu;
+	private Text status1, status2, status3, status4;
+	private ProgressBar pb1, pb2, pb3, pb4;
 	
 	public CustomerView(ArrayList<Student> list, OrderProcessorView opv)
 	{
@@ -67,11 +71,14 @@ public class CustomerView extends VBox{
 		Rectangle header2 = new Rectangle(0, 0, 900, 45);
 		header2.setFill(Color.GOLD);
 
-		HBox menu = new HBox();
+		menu = new HBox();
 		
 		//******************************************
 		//************* Left Side ******************
 		lab5 = new Label("Select Your Pizza Type");
+		lab5.setFont(Font.font("Impact", 18));
+		lab5.setTextFill(Color.MAROON);
+		
 		VBox types = new VBox();
 		pizzaTypes = new ComboBox<String>();
 		pizzaTypes.getItems().add("Pepperoni");
@@ -84,6 +91,9 @@ public class CustomerView extends VBox{
 		//******************************************
 		//************** Middle ********************
 		lab4 = new Label("Add Toppings");
+		lab4.setFont(Font.font("Impact", 18));
+		lab4.setTextFill(Color.MAROON);
+		
 		VBox toppings = new VBox();
 		mushrooms = new CheckBox("Mushrooms");
 		onions = new CheckBox("Onions");
@@ -96,9 +106,18 @@ public class CustomerView extends VBox{
 		//******************************************
 		//*************** Right Side ***************		
 		submit = new Button("Submit");
+		submit.setFont(Font.font("Impact", 20));
+		submit.setTextFill(Color.MAROON);
+		
 		lab1 = new Label("Pickup Time:");
+		lab1.setFont(Font.font("Impact", 18));
+		lab1.setTextFill(Color.MAROON);
 		lab2 = new Label("Name:");
+		lab2.setFont(Font.font("Impact", 18));
+		lab2.setTextFill(Color.MAROON);
 		lab3 = new Label("ASURITE ID:");
+		lab3.setFont(Font.font("Impact", 18));
+		lab3.setTextFill(Color.MAROON);
 		txt1 = new TextField();
 		txt2 = new TextField();
 		txt3 = new TextField();
@@ -127,9 +146,7 @@ public class CustomerView extends VBox{
 		
 		this.getChildren().addAll(header1, title, header2, menu);
 		this.setSpacing(25);
-		
-		
-		
+	
 	}
 	
 	private class NewOrderHandler implements EventHandler<ActionEvent>
@@ -166,26 +183,15 @@ public class CustomerView extends VBox{
 				error.show();
 				errorMessage = true;
 			}
-			if(txt3.getText().contains("a") || txt3.getText().contains("b") || txt3.getText().contains("c") || txt3.getText().contains("d") || txt3.getText().contains("e") || txt3.getText().contains("f") || txt3.getText().contains("g") || txt3.getText().contains("h") || txt3.getText().contains("i") || txt3.getText().contains("j") || txt3.getText().contains("k") || txt3.getText().contains("l") || txt3.getText().contains("m") || txt3.getText().contains("n") || txt3.getText().contains("o") || txt3.getText().contains("p") || txt3.getText().contains("q") || txt3.getText().contains("r") || txt3.getText().contains("s") || txt3.getText().contains("t") || txt3.getText().contains("u") || txt3.getText().contains("v") || txt3.getText().contains("w") || txt3.getText().contains("x") || txt3.getText().contains("y") || txt3.getText().contains("z")) {
-				error.setAlertType(AlertType.ERROR);
-				error.setContentText("Numbers Only (0-9)");
-				error.show();
-				errorMessage = true;
-			}
-			if(txt3.getText().contains("A") || txt3.getText().contains("B") || txt3.getText().contains("C") || txt3.getText().contains("D") || txt3.getText().contains("E") || txt3.getText().contains("F") || txt3.getText().contains("G") || txt3.getText().contains("H") || txt3.getText().contains("I") || txt3.getText().contains("J") || txt3.getText().contains("K") || txt3.getText().contains("L") || txt3.getText().contains("M") || txt3.getText().contains("N") || txt3.getText().contains("O") || txt3.getText().contains("P") || txt3.getText().contains("Q") || txt3.getText().contains("R") || txt3.getText().contains("S") || txt3.getText().contains("T") || txt3.getText().contains("U") || txt3.getText().contains("V") || txt3.getText().contains("W") || txt3.getText().contains("X") || txt3.getText().contains("Y") || txt3.getText().contains("Z")) {
-				error.setAlertType(AlertType.ERROR);
-				error.setContentText("Numbers Only (0-9)");
-				error.show();
-				errorMessage = true;
-			}
-			
+			else {
+			try {
 			//Decide Pizza Type
 			if (pizzaTypes.getSelectionModel().getSelectedItem() == null) {
 				//Error Handling: if pizza type is not chosen
-					error.setAlertType(AlertType.ERROR);
-					error.setContentText("Please choose your pizza type");
-					error.show();
-					errorMessage = true;
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Please choose your pizza type");
+				error.show();
+				errorMessage = true;
 			}
 			else if (pizzaTypes.getValue().equals("Pepperoni"))
 			{
@@ -219,19 +225,17 @@ public class CustomerView extends VBox{
 				order.getOrder().getToppings().add("Extra Cheese");
 			}
 			//Error Handling: if toppings are not selected
-			if(!mushrooms.isSelected() && !onions.isSelected() && !olives.isSelected() && !xcheese.isSelected()) {
+			/*if(!mushrooms.isSelected() && !onions.isSelected() && !olives.isSelected() && !xcheese.isSelected()) {
 				error.setAlertType(AlertType.ERROR);
 				error.setContentText("Please choose toppings");
 				error.show();
 				errorMessage = true;
-			}
-			
+			}*/
 			//Setting necessary parameters to accept order
 			order.setTime(txt1.getText());
 			order.setName(txt2.getText());
 			order.setId(Integer.parseInt(txt3.getText()));
 			
-			if (errorMessage == false) {
 			//Pushing successful order to next process
 			studentList.add(order);
 			opv.updateOrders(order);
@@ -239,6 +243,70 @@ public class CustomerView extends VBox{
 			String content = "Order Confirmed!";
 			Alert success = new Alert(Alert.AlertType.INFORMATION, content, ButtonType.OK);
 			success.show();
+			
+			menu.getChildren().clear();
+			
+			
+			//Customer 2 view
+			
+			status1 = new Text("Preparing...");
+			status1.setFont(Font.font("Impact", 18));
+			status1.setFill(Color.MAROON);
+			status2 = new Text("In the Oven...");
+			status2.setFont(Font.font("Impact", 18));
+			status2.setFill(Color.MAROON);
+			status3 = new Text("Quality Check...");
+			status3.setFont(Font.font("Impact", 18));
+			status3.setFill(Color.MAROON);
+			status4 = new Text("Ready for pickup!");
+			status4.setFont(Font.font("Impact", 18));
+			status4.setFill(Color.MAROON);
+			
+			pb1 = new ProgressBar(0);
+			pb2 = new ProgressBar(0);
+			pb3 = new ProgressBar(0);
+			pb4 = new ProgressBar(0);
+			
+			VBox progress = new VBox();
+			HBox labels = new HBox();
+			HBox bars = new HBox();
+			
+			labels.getChildren().addAll(status1, status2, status3, status4);
+			labels.setSpacing(120);
+			bars.getChildren().addAll(pb1, pb2, pb3, pb4);
+			bars.setSpacing(120);
+			progress.getChildren().addAll(labels, bars);
+			progress.setSpacing(20);
+			progress.setPrefWidth(270);
+			progress.setPadding(new Insets(50, 0, 0, 30));
+			
+			GridPane gridPane = new GridPane();
+			gridPane.setAlignment(Pos.CENTER);
+			gridPane.setVgap(10);
+			ColumnConstraints halfWidth = new ColumnConstraints();
+			halfWidth.setPercentWidth(50);
+			gridPane.getColumnConstraints().addAll(halfWidth, halfWidth);
+			gridPane.setPadding(new Insets(0, 0, 0, 130));
+			
+			menu.getChildren().addAll(progress, gridPane);
+			}
+			catch (NumberFormatException e) {
+				if(txt3.getText().contains("a") || txt3.getText().contains("b") || txt3.getText().contains("c") || 
+					txt3.getText().contains("d") || txt3.getText().contains("e") || txt3.getText().contains("f") || 
+					txt3.getText().contains("g") || txt3.getText().contains("h") || txt3.getText().contains("i") || 
+					txt3.getText().contains("j") || txt3.getText().contains("k") || txt3.getText().contains("l") || 
+					txt3.getText().contains("m") || txt3.getText().contains("n") || txt3.getText().contains("o") || 
+					txt3.getText().contains("p") || txt3.getText().contains("q") || txt3.getText().contains("r") || 
+					txt3.getText().contains("s") || txt3.getText().contains("t") || txt3.getText().contains("u") || 
+					txt3.getText().contains("v") || txt3.getText().contains("w") || txt3.getText().contains("x") || 
+					txt3.getText().contains("y") || txt3.getText().contains("z")) 
+				{
+				error.setAlertType(AlertType.ERROR);
+				error.setContentText("Numbers Only (0-9)");
+				error.show();
+				errorMessage = true;
+				}
+			}
 			}
 		}
 	}
