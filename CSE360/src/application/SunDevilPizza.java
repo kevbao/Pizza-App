@@ -14,6 +14,7 @@ public class SunDevilPizza extends Application {
 	private CustomerView custView;
 	private OrderProcessorView opView;
 	private ChefView chefView;
+	
 	private ArrayList<Student> studentList;
 	
 	public void start(Stage stage) {
@@ -23,6 +24,7 @@ public class SunDevilPizza extends Application {
 		chefView = new ChefView(studentList);
 		opView = new OrderProcessorView(studentList, chefView);
 		custView = new CustomerView(studentList, opView);
+		//chefView2 = new ChefView2(studentList);
 		
 		tabPane = new TabPane();
 		Tab tab1 = new Tab();
@@ -36,6 +38,8 @@ public class SunDevilPizza extends Application {
 		Tab tab3 = new Tab();
 		tab3.setText("Chef View");
 		tab3.setContent(chefView);
+		
+		
 		
 		tabPane.getSelectionModel().select(0);
 		tabPane.getTabs().addAll(tab1, tab2, tab3);
