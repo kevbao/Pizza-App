@@ -34,6 +34,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 //errors to be handled:
@@ -72,6 +73,7 @@ public class CustomerView extends VBox{
 		//******************************************
 		//************* Left Side ******************
 		lab5 = new Label("Select Your Pizza Type");
+		lab5.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		VBox types = new VBox();
 		pizzaTypes = new ComboBox<String>();
 		pizzaTypes.getItems().add("Pepperoni");
@@ -84,6 +86,7 @@ public class CustomerView extends VBox{
 		//******************************************
 		//************** Middle ********************
 		lab4 = new Label("Add Toppings");
+		lab4.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		VBox toppings = new VBox();
 		mushrooms = new CheckBox("Mushrooms");
 		onions = new CheckBox("Onions");
@@ -97,8 +100,11 @@ public class CustomerView extends VBox{
 		//*************** Right Side ***************		
 		submit = new Button("Submit");
 		lab1 = new Label("Pickup Time:");
+		lab1.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		lab2 = new Label("Name:");
+		lab2.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		lab3 = new Label("ASURITE ID:");
+		lab3.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		txt1 = new TextField();
 		txt2 = new TextField();
 		txt3 = new TextField();

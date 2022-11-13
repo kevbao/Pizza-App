@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -63,6 +64,7 @@ public class OrderProcessorView extends VBox {
 		BorderPane borderPane = new BorderPane();
 		ScrollPane scrollPane = new ScrollPane(orders);
 		lab1 = new Label("Orders");
+		lab1.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		accept = new Button("Accept");
 		accept.setOnAction(new ButtonHandler());
 		reject = new Button("Reject");

@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -56,6 +57,7 @@ public class ChefView extends VBox {
 		BorderPane borderPane = new BorderPane();
 		ScrollPane scrollPane = new ScrollPane(orders);
 		lab1 = new Label("Orders");
+		lab1.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		borderPane.setTop(lab1);
 		borderPane.setCenter(scrollPane);
 		borderPane.setPrefSize(400, 420);
@@ -88,6 +90,7 @@ public class ChefView extends VBox {
 		BorderPane borderPane2 = new BorderPane();
 		ScrollPane scrollPane2 = new ScrollPane(chef);
 		lab2 = new Label("Chef #");
+		lab2.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		borderPane2.setTop(lab2);
 		borderPane2.setCenter(scrollPane2);
 		borderPane2.setPrefSize(300, 320);
