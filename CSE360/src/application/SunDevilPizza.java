@@ -24,7 +24,7 @@ public class SunDevilPizza extends Application {
 		chefView = new ChefView(studentList);
 		opView = new OrderProcessorView(studentList, chefView);
 		custView = new CustomerView(studentList, opView);
-		//chefView2 = new ChefView2(studentList);
+		
 		
 		tabPane = new TabPane();
 		Tab tab1 = new Tab();

@@ -163,15 +163,6 @@ public class ChefView extends VBox {
 				
 			}
 			
-			public void updateOrders(Student order) {
-				//Is invoked when the CUSTOMER hits the submit button; it
-				//creates a new radioButton for OP to select.
-				RadioButton newOrder = new RadioButton(order.toString());
-				newOrder.setPadding(new Insets(0, 0, 0, 10));
-				newOrder.setOnAction(new SelectionHandler(order));
-				newOrder.setToggleGroup(aorders);
-				orders.getChildren().add(newOrder);
-			}
 			
 			
 	
@@ -200,24 +191,8 @@ public class ChefView extends VBox {
 	}
 	
 	
-	private class SelectionHandler implements EventHandler<ActionEvent> {
-		//SelectionHandler scans the selected order choice into a temp object
-		//and will only transfer to ChefView when submit button is clicked.
-		private Student order;
-		
-		public SelectionHandler(Student order) {
-		
-			this.order = order;
-		}
-		public void handle(ActionEvent event) {
-
-			boolean selected = ((RadioButton)event.getSource()).isSelected();
-			
-			if (selected) {
-				temp = order;
-			} 
-		}
-	}
+	
+	
 	
 	
 }
