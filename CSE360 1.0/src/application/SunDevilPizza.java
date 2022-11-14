@@ -15,14 +15,19 @@ public class SunDevilPizza extends Application {
 	private OrderProcessorView opView;
 	private ChefView chefView;
 	private ArrayList<Student> studentList;
+	private Progress progress1, progress2, progress3, progress4;
 	
 	public void start(Stage stage) {
 		StackPane root = new StackPane();
 		studentList = new ArrayList<Student>();
+		progress1 = new Progress();
+		progress2 = new Progress();
+		progress3 = new Progress();
+		progress4 = new Progress();
 		
-		chefView = new ChefView(studentList);
+		chefView = new ChefView(studentList, progress1, progress2, progress3, progress4);
 		opView = new OrderProcessorView(studentList, chefView);
-		custView = new CustomerView(studentList, opView);
+		custView = new CustomerView(studentList, opView, progress1, progress2, progress3, progress4);
 		
 		tabPane = new TabPane();
 		Tab tab1 = new Tab();

@@ -49,17 +49,24 @@ public class CustomerView extends VBox{
 	private TextField txt1, txt2, txt3; 
 	private Label lab1, lab2, lab3, lab4, lab5;
 	private ComboBox<String> pizzaTypes;
-	private Button submit;
+	private Button submit, refresh;
 	private OrderProcessorView opv;
 	private CheckBox mushrooms, onions, olives, xcheese;
-	private HBox menu;
+	private HBox menu, bars;
 	private Text status1, status2, status3, status4;
-	private ProgressBar pb1, pb2, pb3, pb4;
+	public ProgressBar pb1, pb2, pb3, pb4;
+	Progress progress1, progress2, progress3, progress4;
 	
-	public CustomerView(ArrayList<Student> list, OrderProcessorView opv)
+	public CustomerView(ArrayList<Student> list, OrderProcessorView opv, Progress progress1, Progress progress2, Progress progress3, Progress progress4)
 	{
 		this.studentList = list;
 		this.opv = opv;
+		this.progress1 = progress1;
+		this.progress2 = progress2;
+		this.progress3 = progress3;
+		this.progress4 = progress4;
+		
+
 		
 		Rectangle header1 = new Rectangle(0, 0, 900, 45);
 		header1.setFill(Color.GOLD);
@@ -261,22 +268,32 @@ public class CustomerView extends VBox{
 			status4 = new Text("Ready for pickup!");
 			status4.setFont(Font.font("Impact", 18));
 			status4.setFill(Color.MAROON);
-			
 			pb1 = new ProgressBar(0);
+			pb1.setStyle("-fx-accent: gold;");
 			pb2 = new ProgressBar(0);
+			pb2.setStyle("-fx-accent: gold;");
 			pb3 = new ProgressBar(0);
+			pb3.setStyle("-fx-accent: gold;");
 			pb4 = new ProgressBar(0);
+			pb4.setStyle("-fx-accent: gold;");
+			bars = new HBox();
+			bars.getChildren().addAll(pb1, pb2, pb3, pb4);
+			bars.setSpacing(120);
+			
+			refresh = new Button("Refresh");
+			refresh.setOnAction(new RefreshHandler());
+			refresh.setFont(Font.font("Impact", 20));
+			refresh.setTextFill(Color.MAROON);
 			
 			VBox progress = new VBox();
 			HBox labels = new HBox();
-			HBox bars = new HBox();
 			
+
 			labels.getChildren().addAll(status1, status2, status3, status4);
 			labels.setSpacing(120);
-			bars.getChildren().addAll(pb1, pb2, pb3, pb4);
-			bars.setSpacing(120);
-			progress.getChildren().addAll(labels, bars);
-			progress.setSpacing(20);
+			
+			progress.getChildren().addAll(labels, bars, refresh);
+			progress.setSpacing(30);
 			progress.setPrefWidth(270);
 			progress.setPadding(new Insets(50, 0, 0, 30));
 			
@@ -308,6 +325,16 @@ public class CustomerView extends VBox{
 				}
 			}
 			}
+		}
+	}
+
+	public class RefreshHandler implements EventHandler<ActionEvent> {
+		//Button handler for refresh button to see progress of pizza
+		public void handle(ActionEvent event) {
+			pb1.setProgress(progress1.getProgress1());
+			pb2.setProgress(progress2.getProgress1());
+			pb3.setProgress(progress3.getProgress1());
+			pb4.setProgress(progress4.getProgress1());
 		}
 	}
 }

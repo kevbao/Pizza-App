@@ -30,7 +30,7 @@ import javafx.scene.text.TextAlignment;
 
 public class ChefView extends VBox {
 	
-	private ArrayList<Student> studentList;
+	ArrayList<Student> studentList;
 	private static VBox orders;
 	private static VBox orderInfo;
 	private Label lab1;
@@ -41,9 +41,19 @@ public class ChefView extends VBox {
 	private Button preparing, intheoven, qualitycheck, readyforpickup;
 	private Student temp;
 	private String selChef;
+	private CustomerView custView;
+	private HBox control;
+	//double progress1;
+	//private SunDevilPizza sdp;
+	Progress progress1, progress2, progress3, progress4;
 	
-	public ChefView(ArrayList<Student> list) {
+	public ChefView(ArrayList<Student> list, Progress progress1, Progress progress2, Progress progress3, Progress progress4) {
 		this.studentList = list;
+		this.progress1 = progress1;
+		this.progress2 = progress2;
+		this.progress3 = progress3;
+		this.progress4 = progress4;
+		//progress1 = 0.0;
 		
 		aorders = new ToggleGroup();
 		
@@ -57,7 +67,7 @@ public class ChefView extends VBox {
 		Rectangle header2 = new Rectangle(0, 0, 900, 45);
 		header2.setFill(Color.GOLD);
 
-		HBox control = new HBox();
+		control = new HBox();
 		
 		//************************************
 		//************ Left Side *************
@@ -179,15 +189,19 @@ public class ChefView extends VBox {
 				preparing = new Button("Preparing");
 				preparing.setFont(Font.font("Impact", 20));
 				preparing.setTextFill(Color.MAROON);
+				preparing.setOnAction(new PreparingHandler());
 				intheoven = new Button("In The Oven");
 				intheoven.setFont(Font.font("Impact", 20));
 				intheoven.setTextFill(Color.MAROON);
+				intheoven.setOnAction(new PreparingHandler1());
 				qualitycheck = new Button("Quality Check");
 				qualitycheck.setFont(Font.font("Impact", 20));
 				qualitycheck.setTextFill(Color.MAROON);
+				qualitycheck.setOnAction(new PreparingHandler2());
 				readyforpickup = new Button("Ready for pickup");
 				readyforpickup.setFont(Font.font("Impact", 20));
 				readyforpickup.setTextFill(Color.MAROON);
+				readyforpickup.setOnAction(new PreparingHandler3());
 				
 				
 				borderPane3.setTop(lab3);
@@ -254,5 +268,44 @@ public class ChefView extends VBox {
 		} 
 	
 	}
-	
+	private class PreparingHandler implements EventHandler<ActionEvent> {
+		//ButtonHandler manages the Accept button, when clicked, it adds 
+		//the selected order to the chef UI
+		public void handle(ActionEvent event) {
+			progress1.setProgress1(1.0);
+			progress2.setProgress1(0.0);
+			progress3.setProgress1(0.0);
+			progress4.setProgress1(0.0);
+		}
+	}
+	private class PreparingHandler1 implements EventHandler<ActionEvent> {
+		//ButtonHandler manages the Accept button, when clicked, it adds 
+		//the selected order to the chef UI
+		public void handle(ActionEvent event) {
+			progress1.setProgress1(1.0);
+			progress2.setProgress1(1.0);
+			progress3.setProgress1(0.0);
+			progress4.setProgress1(0.0);
+		}
+	}
+	private class PreparingHandler2 implements EventHandler<ActionEvent> {
+		//ButtonHandler manages the Accept button, when clicked, it adds 
+		//the selected order to the chef UI
+		public void handle(ActionEvent event) {
+			progress1.setProgress1(1.0);
+			progress2.setProgress1(1.0);
+			progress3.setProgress1(1.0);
+			progress4.setProgress1(0.0);
+		}
+	}
+	private class PreparingHandler3 implements EventHandler<ActionEvent> {
+		//ButtonHandler manages the Accept button, when clicked, it adds 
+		//the selected order to the chef UI
+		public void handle(ActionEvent event) {
+			progress1.setProgress1(1.0);
+			progress2.setProgress1(1.0);
+			progress3.setProgress1(1.0);
+			progress4.setProgress1(1.0);
+		}
+	}
 }
